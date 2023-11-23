@@ -4,7 +4,7 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=0.67">
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<title>Gentrification in Malaysia</title>
+	<title>Short term evolution of economic fluctuation in Malaysia</title>
 	<meta name="author" content="Alvaro Trigo Lopez" />
 	<meta name="description" content="pagePiling.js plugin by Alvaro Trigo." />
 	<meta name="keywords"  content="pile,piling,piling.js,stack,pages,scrolling,stacking,touch,fullpile,scroll,plugin,jquery" />
@@ -18,7 +18,7 @@
 
 	<script src="https://code.highcharts.com/modules/accessibility.js"></script>
 
-	<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Lato:300,400,700" />
+	<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Lato:300,400,700" />
 	<link rel="stylesheet" type="text/css" href="../jquery.pagepiling.css" />
 	<link rel="stylesheet" type="text/css" href="examples.css" />
 	<link rel="stylesheet" type="text/css" href="style.css" />
@@ -471,7 +471,7 @@
 		 // Load data from CSV
  d3.csv("https://raw.githubusercontent.com/WeendyLRY/Data_For_DV_Lab/main/final_cpi_gdp_state.csv").then(function(data) {
     // Function to update the line chart based on the selected state
-    function updateLineChart() {
+    function updateLineChart6() {
         // Get selected state from the dropdown
         const selectedState = document.getElementById("stateSelector").value;
 
@@ -479,14 +479,14 @@
         const filteredData = data.filter(d => d.state === selectedState);
 
         // Update the chart with filtered data
-        updateChart(filteredData);
+        updateChart6(filteredData);
     }
 
     // Initial chart setup
-    updateLineChart();
+    updateLineChart6();
 
     // Function to update the chart based on the provided data
-    function updateChart(data) {
+    function updateChart6(data) {
         // Extract unique years
         const years = [...new Set(data.map(d => d.year))];
 
@@ -592,7 +592,7 @@
     }
 
     // Expose the updateLineChart function to the global scope
-    window.updateLineChart = updateLineChart;
+    window.updateLineChart6 = updateLineChart6;
 });
 	</script>
 	<script type="text/javascript">
@@ -684,7 +684,7 @@
 		 // Load data from CSV
  d3.csv("https://raw.githubusercontent.com/WeendyLRY/Data_For_DV_Lab/main/cpi_population_dataset.csv").then(function(data) {
     // Function to update the line chart based on the selected state
-    function updateLineChart() {
+    function updateLineChart7() {
         // Get selected state from the dropdown
         const selectedState = document.getElementById("stateSelectorPopulation").value;
 
@@ -692,14 +692,14 @@
         const filteredData = data.filter(d => d.state === selectedState);
 
         // Update the chart with filtered data
-        updateChart(filteredData);
+        updateChart7(filteredData);
     }
 
     // Initial chart setup
-    updateLineChart();
+    updateLineChart7();
 
     // Function to update the chart based on the provided data
-    function updateChart(data) {
+    function updateChart7(data) {
         // Extract unique years
         const years = [...new Set(data.map(d => d.year))];
 
@@ -805,7 +805,7 @@
     }
 
     // Expose the updateLineChart function to the global scope
-    window.updateLineChart = updateLineChart;
+    window.updateLineChart7 = updateLineChart7;
 });
 	</script>
 
@@ -818,11 +818,11 @@
 			*/
 	    	$('#pagepiling').pagepiling({
 	    		menu: '#menu',
-	    		anchors: ['page1', 'page2', 'page3', 'page4', 'page5', 'page6', 'page7'],
-			    sectionsColor: ['white', 'white', 'white', '#39C', 'white', 'white', 'white'],
+	    		anchors: ['page1', 'page2', 'page3', 'page4', 'page5', 'page6', 'page7', 'page8'],
+			    sectionsColor: ['white', 'white', 'white', '#39C', 'white', 'white', 'white', 'white'],
 			    navigation: {
 			    	'position': 'right',
-			   		'tooltips': ['Page 1', 'Page 2', 'Page 3', 'Page 4', 'Page 5', 'Page 6', 'Page 7']
+			   		'tooltips': ['Page 1', 'Page 2', 'Page 3', 'Page 4', 'Page 5', 'Page 6', 'Page 7', 'Page 8']
 			   	},
 			    afterRender: function(){
 			    	$('#pp-nav').addClass('custom');
@@ -851,6 +851,192 @@
 			});
 	    });
     </script>
+
+
+<!-- section 8 -->
+<script type="text/javascript">
+
+    // Display specifications
+    const margin = { top: 50, right: 50, bottom: 50, left: 50 };
+    const width = 1.1*(window.innerWidth - margin.left - margin.right);
+
+    const height = 0.6*(window.innerHeight - margin.top - margin.bottom);
+
+    // Format survival rate
+    const fsr = d3.format(".2f");
+
+    // Load the CSV data
+    d3.csv("https://raw.githubusercontent.com/WeendyLRY/Data_For_DV_Lab/main/cpi_headline.csv", function (d) {
+        return {
+            date: d3.timeParse("%Y-%m-%d")(d.date),
+            overall: +d.overall,
+            food_beverage: +d.food_beverage,
+            alcohol_tobacco: +d.alcohol_tobacco,
+            clothing_footwear: +d.clothing_footwear,
+            housing_utilities: +d.housing_utilities,
+            furnishings: +d.furnishings,
+            health: +d.health,
+            transport: +d.transport,
+            communication: +d.communication,
+            recreation_culture: +d.recreation_culture,
+            education: +d.education,
+            hospitality: +d.hospitality,
+            misc: +d.misc
+        };
+    }).then(function (data) {
+
+        // Set x scale
+        var x = d3.scaleTime()
+            .domain(d3.extent(data, d => d.date))
+            .range([0, width]);
+
+        // Set y scale
+        var y = d3.scaleLinear()
+            .domain([80, 200])
+            .range([height, 0]);
+
+        // line function
+        var line = d3.line()
+            .x(d => x(d.date))
+            .y(d => y(d.overall));
+
+        // Create container
+        var container = d3.select("#section-8-time-series-analysis")
+            .append("svg")
+            .attr("width", width + margin.left + margin.left + margin.left + margin.left + margin.right)
+            .attr("height", height + margin.top + margin.bottom)
+            .append("g")
+            .attr("class", "container")
+            .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+        // Title
+        container.append("text")
+            .attr("x", width * .5)
+            .attr("y", margin.top * .1)
+            .text("Price Index (2010-2023)")
+            .attr("text-anchor", "middle")
+            .style("font-family", "sans-serif")
+            .style("font-size", margin.top * .4);
+
+        // X axis
+        container.append("g")
+            .attr("class", "axis")
+            .attr("transform", "translate(0," + height + ")")
+            .call(d3.axisBottom(x).tickFormat(d3.timeFormat("%Y-%m-%d")));
+
+        // Y axis
+        container.append("g")
+            .attr("class", "axis")
+            .call(d3.axisLeft(y));
+
+        // Y label
+        container.append("text")
+            .attr("transform", "rotate(-90)")
+            .attr("x", -height / 2)
+            .attr("y", -margin.right * .7)
+            .style("text-anchor", "middle")
+            .text("Price Index")
+            .attr("font-family", "sans-serif")
+            .attr("font-size", margin.right / 4);
+
+        // Legend
+        var legend = container.append("g")
+            .attr("class", "legend")
+            .attr("transform", "translate(" + (width - 100) + "," + 20 + ")")
+            .selectAll("g")
+            .data(Object.keys(data[0]).slice(1))
+            .enter().append("g")
+            .attr("transform", function (d, i) { return "translate(0," + i * 20 + ")"; });
+
+        legend.append("rect")
+            .attr("width", 18)
+            .attr("height", 18)
+            .attr("fill", getColor)
+            .attr("x", 110)
+            .attr("y", 4);
+
+        legend.append("text")
+            .attr("x", 130)
+            .attr("y", 15)
+            .attr("dy", ".35em")
+            .style("text-anchor", "start")
+            .text(function (d) { return d; });
+
+        // Draw lines based on selected checkboxes
+        drawLines();
+
+        // Redraw lines when checkbox state changes
+        d3.selectAll(".selector").on("change", function () {
+            drawLines();
+        });
+
+        // Function to draw lines based on selected checkboxes
+        function drawLines() {
+            container.selectAll("path").remove();
+            container.selectAll("circle").remove();
+
+            // Filter data based on selected checkboxes
+            var selectedColumns = d3.selectAll(".selector:checked").nodes().map(function (checkbox) {
+                return checkbox.value;
+            });
+
+            // Draw lines for selected columns
+            selectedColumns.forEach(function (column) {
+                line.y(d => y(d[column]));
+
+                container.append("path")
+                    .data([data])
+                    .attr("class", column)
+                    .attr("fill", "none")
+                    .attr("stroke", getColor(column))
+                    .attr("mix-blend-mode", "multiply")
+                    .attr("stroke-width", 2)
+                    .attr("stroke-linejoin", "round")
+                    .attr("d", line);
+
+                container.selectAll("circle." + column)
+                    .data(data)
+                    .enter()
+                    .append("circle")
+                    .attr("class", column)
+                    .attr("cx", d => x(d.date))
+                    .attr("cy", d => y(d[column]))
+                    .attr("r", 6)
+                    .attr("fill", getColor(column))
+                    .attr("fill-opacity", .5)
+                    .append("title")
+                    .text(function (d) {
+                        return "Date: " + d3.timeFormat("%Y-%m-%d")(d.date) + "\n" + column + " Price Index: " + fsr(d[column]);
+                    });
+            });
+        }
+
+        // Function to get color for a specific column
+        function getColor(column) {
+            // You can define your own color scheme based on the column names
+            // For simplicity, this example uses a hardcoded color for each column
+            const colorMap = {
+                overall: "purple",
+                food_beverage: "green",
+                alcohol_tobacco: "blue",
+                clothing_footwear: "red",
+                housing_utilities: "orange",
+                furnishings: "pink",
+                health: "brown",
+                transport: "white",
+                communication: "cyan",
+                recreation_culture: "yellow",
+                education: "lime",
+                hospitality: "magenta",
+                misc: "black",
+            };
+
+            return colorMap[column] || "black";
+        }
+
+    });
+
+</script>
 	
 	
 	
@@ -871,8 +1057,9 @@
 	<div id="pagepiling">
 	    <div class="section" id="section1">
             <div id="background-image-section-1"></div>
-	    	<h1>Gentrification in Malaysia - visualized</h1>
+	    	<h1>Short term evolution of economic fluctuation in Malaysia</h1>
 			<p>In the bustling landscape of Malaysia, the forces of urban development are reshaping neighborhoods, altering the socioeconomic fabric, and leaving an indelible mark on the nation's cities.</p>
+            
 			<!-- <img src="imgs/GettyImages_466729918.0.gif" alt="pagePiling" /> -->
 			<br><br />
 			
@@ -980,7 +1167,7 @@
 						<source src="imgs/flowers.webm" type="video/webm">
 					</video>
 	    		<p>According to The Edge Malaysia (2019)</p>
-	    		<h1>“The difference is that gentrification indicates a change in the neighbourhood. Properties would become too expensive and rents too high as new developments come in, which would force the population to move elsewhere.”</h1>
+	    		<h1>“GDP deflator is a measure of all products and services of the country (including non-consumer goods and services), while the CPI uses only consumer goods. GDP deflator includes only domestic goods, while CPI includes anything bought by consumers, which includes non-domestic products (imported or foreign-made).”</h1>
 			</div>
 	    		
 	    	</div>
@@ -997,36 +1184,44 @@
 					<tr>
 					<td>&nbsp;
 						<div>
+                            <p>When Consumar Price Index like Food and Beverage prices and housing prices are compared against states, we found that they are mostly consistent.</p>
 							<div id="section-6-stacked-chart"></div>
 		
-							<p>When Consumar Price Index like Food and Beverage prices and housing prices are compared against states, we found that they are mostly consistent.</p>
+							
 						</div>
 					</td>
 					<td>
 						<div>
+                            <div id="sect6-text-description">
+                                <p>Some states have a positive correlation with GDP and Consumer price index where an increase in GDP also leads to the increase in consumer price index. 
+
+                                    On the other hand, some states have relatively low Food and beverage cost and housing utilities cost despite the increase in GDP. 
+                                    
+                                    Can you pinpoint these states? Interact with the drop down to learn about these patterns amongst the states in Malaysia.  </p>
+                                </div>
 							<div id="section-6-line-chart"></div>
-							<label for="stateSelector">Select State:</label>
-								<select id="stateSelector" onchange="updateLineChart()">
-									<option value="Johor">Johor</option>
-									<option value="Kedah">Kedah</option>
-									<option value="Kelantan">Kelantan</option>
-			
-									<option value="Melaka">Melaka</option>
-									<option value="Negeri Sembilan">Negeri Sembilan</option>
-									<option value="Pahang">Pahang</option>
-									<option value="Pulau Pinang">Pulau Pinang</option>
-									<option value="Perak">Perak</option>
-									<option value="Perlis">Perlis</option>
-									<option value="Selangor">Selangor</option>
-									<option value="Sabah">Sabah</option>
-									<option value="Terengganu">Terengganu</option>
-									<option value="Sarawak">Sarawak</option>
-									<option value="W.P. Kuala Lumpur">W.P. Kuala Lumpur</option>
-									<option value="W.P. Labuan">W.P. Labuan</option>
-									
-									<!-- Add other states as options -->
-								</select>
-							</div>
+                                <label for="stateSelector">Select State:</label>
+                                    <select id="stateSelector" onchange="updateLineChart6()">
+                                        <option value="Johor">Johor</option>
+                                        <option value="Kedah">Kedah</option>
+                                        <option value="Kelantan">Kelantan</option>
+                                        <option value="Melaka">Melaka</option>
+                                        <option value="Negeri Sembilan">Negeri Sembilan</option>
+                                        <option value="Pahang">Pahang</option>
+                                        <option value="Pulau Pinang">Pulau Pinang</option>
+                                        <option value="Perak">Perak</option>
+                                        <option value="Perlis">Perlis</option>
+                                        <option value="Selangor">Selangor</option>
+                                        <option value="Sabah">Sabah</option>
+                                        <option value="Terengganu">Terengganu</option>
+                                        <option value="Sarawak">Sarawak</option>
+                                        <option value="W.P. Kuala Lumpur">W.P. Kuala Lumpur</option>
+                                        <option value="W.P. Labuan">W.P. Labuan</option>
+                                        
+                                        <!-- Add other states as options -->
+                                    </select>
+                                  </div>  
+							
 						
 					</td>
 					</tr>
@@ -1039,7 +1234,7 @@
 
 			
 				
-	    	</div>
+	    	
 	    </div>
 
 		<!-- <div class="section" id="section7">
@@ -1061,16 +1256,19 @@
 					<tr>
 					<td>&nbsp;
 						<div>
+
+                            <p>When Consumar Price Index like Food and Beverage prices and housing prices are compared against states, we found that they are mostly consistent.</p>
 							<div id="section-7-stacked-chart"></div>
 		
-							<p>When Consumar Price Index like Food and Beverage prices and housing prices are compared against states, we found that they are mostly consistent.</p>
+							
 						</div>
 					</td>
 					<td>
 						<div>
+                            <p>Since population size doesn't vary much for the two years in this line chart, it's difficult to tell if it ever impact the Consumer price index.</p>
 							<div id="section-7-line-chart"></div>
 							<label for="stateSelectorPopulation">Select State:</label>
-								<select id="stateSelectorPopulation" onchange="updateLineChart()">
+								<select id="stateSelectorPopulation" onchange="updateLineChart7()">
 									<option value="Johor">Johor</option>
 									<option value="Kedah">Kedah</option>
 									<option value="Kelantan">Kelantan</option>
@@ -1098,8 +1296,59 @@
 					</table>
 				
 				
+            </div>
+		</div>
 
-			</div>
+        <div class="section" id="section8">
+	    	<div class="intro">
+                
+				<div id="background-image-section-8"></div>
+				
+	    		<h1>Time series of consumer price index in Malaysia</h1>
+
+                
+                <label><input class="selector" type="checkbox" value="overall" checked="true"> Overall</label>
+                <label><input class="selector" type="checkbox" value="food_beverage" checked="true"> Food & Beverage</label>
+                <label><input class="selector" type="checkbox" value="alcohol_tobacco" checked="true"> Alcohol & Tobacco</label>
+                <label><input class="selector" type="checkbox" value="clothing_footwear" checked="true"> Clothing & Footwear</label>
+                <label><input class="selector" type="checkbox" value="housing_utilities" checked="true"> Housing & Utilities</label>
+                <label><input class="selector" type="checkbox" value="furnishings" checked="true"> Furnishings</label>
+                <label><input class="selector" type="checkbox" value="health" checked="true"> Health</label>
+                <label><input class="selector" type="checkbox" value="transport" checked="true"> Transport</label>
+                <label><input class="selector" type="checkbox" value="communication" checked="true"> Communication</label>
+                <label><input class="selector" type="checkbox" value="recreation_culture" checked="true"> Recreation & Culture</label>
+                <label><input class="selector" type="checkbox" value="education" checked="true"> Education</label>
+                <label><input class="selector" type="checkbox" value="hospitality" checked="true"> Hospitality</label>
+                <label><input class="selector" type="checkbox" value="misc" checked="true"> Miscellaneous</label>
+
+                <div id="section-8-time-series-analysis"></div>
+              
+				<!-- <table>
+					<tbody>
+					
+					<tr>
+					<td>&nbsp;
+						<div>
+							
+		
+							<p>When Consumar Price Index like Food and Beverage prices and housing prices are compared against states, we found that they are mostly consistent.</p>
+						</div>
+					</td>
+					<td>
+						<div>
+							
+							
+							</div>
+						
+					</td>
+					</tr>
+					</tbody>
+					</table> -->
+				
+				
+            </div>
+		</div>
+
 
 
 	</div>
