@@ -1,0 +1,61 @@
+year,state,category,cpi,population
+2021,Johor,food_beverage,1725,131314.846
+2021,Johor,housing_utilities,1468.7,131314.846
+2021,Kedah,food_beverage,1575.2,47517.775
+2021,Kedah,housing_utilities,1473,47517.775
+2021,Kelantan,food_beverage,1615.1,25801.597
+2021,Kelantan,housing_utilities,1388.7,25801.597
+2021,Melaka,food_beverage,1663.7,41904.895
+2021,Melaka,housing_utilities,1480.5,41904.895
+2021,Negeri Sembilan,food_beverage,1634.7,47789.743
+2021,Negeri Sembilan,housing_utilities,1435.7,47789.743
+2021,Pahang,food_beverage,1635.1,55407.893
+2021,Pahang,housing_utilities,1399,55407.893
+2021,Perak,food_beverage,1566,76932.3
+2021,Perak,housing_utilities,1362.9,76932.3
+2021,Perlis,food_beverage,1495.1,5869.705
+2021,Perlis,housing_utilities,1346,5869.705
+2021,Pulau Pinang,food_beverage,1696.2,99124.949
+2021,Pulau Pinang,housing_utilities,1488.9,99124.949
+2021,Sabah,food_beverage,1488.1,79005.88
+2021,Sabah,housing_utilities,1282.8,79005.88
+2021,Sarawak,food_beverage,1565.1,131585.066
+2021,Sarawak,housing_utilities,1306.8,131585.066
+2021,Selangor,food_beverage,1714,344013.152
+2021,Selangor,housing_utilities,1519.4,344013.152
+2021,Terengganu,food_beverage,1566.1,35244.557
+2021,Terengganu,housing_utilities,1361.5,35244.557
+2021,W.P. Kuala Lumpur,food_beverage,1675.2,219722.78
+2021,W.P. Kuala Lumpur,housing_utilities,1535.3,219722.78
+2021,W.P. Labuan,food_beverage,1498,7651.116
+2021,W.P. Labuan,housing_utilities,1423.8,7651.116
+2022,Johor,food_beverage,1831,142073.142
+2022,Johor,housing_utilities,1487.5,142073.142
+2022,Kedah,food_beverage,1633.2,50947.135
+2022,Kedah,housing_utilities,1501.1,50947.135
+2022,Kelantan,food_beverage,1687.6,26899.787
+2022,Kelantan,housing_utilities,1407.9,26899.787
+2022,Melaka,food_beverage,1740.6,45499.587
+2022,Melaka,housing_utilities,1510.3,45499.587
+2022,Negeri Sembilan,food_beverage,1713,50849.277
+2022,Negeri Sembilan,housing_utilities,1462.9,50849.277
+2022,Pahang,food_beverage,1715.9,61410.195
+2022,Pahang,housing_utilities,1424.4,61410.195
+2022,Perak,food_beverage,1650.4,80222.899
+2022,Perak,housing_utilities,1390.7,80222.899
+2022,Perlis,food_beverage,1568.4,6206.267
+2022,Perlis,housing_utilities,1378.1,6206.267
+2022,Pulau Pinang,food_beverage,1798.3,112146.707
+2022,Pulau Pinang,housing_utilities,1511.9,112146.707
+2022,Sabah,food_beverage,1563.5,81940.32
+2022,Sabah,housing_utilities,1306.4,81940.32
+2022,Sarawak,food_beverage,1645,140176.337
+2022,Sarawak,housing_utilities,1316.2,140176.337
+2022,Selangor,food_beverage,1839.7,384908.091
+2022,Selangor,housing_utilities,1550.4,384908.091
+2022,Terengganu,food_beverage,1643,37317.527
+2022,Terengganu,housing_utilities,1379.3,37317.527
+2022,W.P. Kuala Lumpur,food_beverage,1759.8,239836.471
+2022,W.P. Kuala Lumpur,housing_utilities,1562.7,239836.471
+2022,W.P. Labuan,food_beverage,1549.8,7958.17
+2022,W.P. Labuan,housing_utilities,1440.2,7958.17
